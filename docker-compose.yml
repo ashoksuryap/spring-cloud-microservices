@@ -23,13 +23,13 @@ mysql-db2:
     MYSQL_DATABASE: reviewservice
     
 service-registry:
-  image: badalb/service-registry
+  image: ashoksuryap/service-registry
   hostname: service-registry
   ports:
    - "8761:8761"
    
 book-service:
-  image: badalb/book-service
+  image: ashoksuryap/book-service
   hostname: book-service
   links:
     - service-registry
@@ -45,7 +45,7 @@ book-service:
     - "8070:8070"
 
 review-service:
-  image: badalb/review-service
+  image: ashoksuryap/review-service
   hostname: review-service
   links:
     - service-registry
@@ -58,7 +58,7 @@ review-service:
   ports:
     - "8050:8050"
 inventory-service:
-  image: badalb/inventory-service
+  image: ashoksuryap/inventory-service
   hostname: inventory-service
   links:
     - service-registry
@@ -69,7 +69,7 @@ inventory-service:
     - "8060:8060"
     
 api-gateway:
-  image: badalb/api-gateway
+  image: ashoksuryap/api-gateway
   hostname: api-gateway
   links:
     - service-registry
@@ -84,7 +84,7 @@ api-gateway:
     - "8080:8080"
     
 hystrix-monitor-service:
-  image: badalb/hystrix-monitor-service
+  image: ashoksuryap/hystrix-monitor-service
   hostname: hystrix-monitor-service
   links:
     - service-registry
@@ -98,7 +98,7 @@ hystrix-monitor-service:
     - "9000:9000"
     
 uaa-service:
-  image: badalb/uaa-service
+  image: ashoksuryap/uaa-service
   hostname: uaa-service
   links:
     - service-registry
