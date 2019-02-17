@@ -18,7 +18,6 @@ public class Book implements Serializable {
 	private static final long serialVersionUID = -6671249233391714613L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String title;

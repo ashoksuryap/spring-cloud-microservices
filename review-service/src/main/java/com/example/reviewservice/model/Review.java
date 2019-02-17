@@ -18,7 +18,6 @@ public class Review implements Serializable {
 	private static final long serialVersionUID = 3885840258330994202L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String isbn;

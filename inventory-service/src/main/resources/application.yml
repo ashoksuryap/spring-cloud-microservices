@@ -9,6 +9,8 @@ server:
 # Define the Eureka server that handles service registration
 eureka:
   client:
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
       defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
 
