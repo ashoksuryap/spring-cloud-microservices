@@ -1,7 +1,7 @@
 version: '3'
 services:
-  mysql-db:
-    hostname: mysql-db
+  bookservicedb:
+    hostname: bookservicedb
     environment:
       MYSQL_DATABASE: bookservice
       MYSQL_PASSWORD: password
@@ -10,8 +10,8 @@ services:
     ports:
       - '3307:3306'
     restart: always
-  mysql-db2:
-    hostname: reviewservice-db
+  reviewservicedb:
+    hostname: reviewservicedb
     environment:
       MYSQL_DATABASE: reviewservice
       MYSQL_PASSWORD: password
@@ -19,49 +19,49 @@ services:
     image: 'mysql:latest'
     ports:
       - '3306:3306'
-  service-registry:
-    hostname: service-registry
+  eureka:
+    hostname: eureka
     image: ashoksuryap/service-registry
     ports:
       - '8761:8761'
     restart: always
-  review-service:
+  reviewservice:
     depends_on:
-      - service-registry
-      - mysql-db2
+      - eureka
+      - reviewservicedb
     environment:
-      DB_HOST: mysql-db2
+      DB_HOST: reviewservicedb
       DB_PORT: 3306
-      EUREKA_HOST: service-registry
+      EUREKA_HOST: eureka
       EUREKA_PORT: 8761
-    hostname: review-service
+    hostname: reviewservice
     image: ashoksuryap/review-service
     ports:
       - '8050:8050'
     restart: always
-  inventory-service:
+  inventoryservice:
     depends_on:
-      - service-registry
+      - eureka
     environment:
-      EUREKA_HOST: service-registry
+      EUREKA_HOST: eureka
       EUREKA_PORT: 8761
-    hostname: inventory-service
+    hostname: inventoryservice
     image: ashoksuryap/inventory-service
     ports:
       - '8060:8060'
     restart: always
-  book-service:
+  bookservice:
     depends_on:
-      - service-registry
-      - mysql-db
-      - review-service
-      - inventory-service
+      - eureka
+      - bookservicedb
+      - reviewservice
+      - inventoryservice
     environment:
-      DB_HOST: mysql-db
+      DB_HOST: bookservicedb
       DB_PORT: 3306
-      EUREKA_HOST: service-registry
+      EUREKA_HOST: eureka
       EUREKA_PORT: 8761
-    hostname: book-service
+    hostname: bookservice
     image: ashoksuryap/book-service
     ports:
       - '8070:8070'
