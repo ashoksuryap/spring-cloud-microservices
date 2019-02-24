@@ -9,10 +9,11 @@ server:
 # Defines the Eureka server that is used by the Netflix OSS components to use as the registry
 # for server discovery
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     registerWithEureka: false
     fetchRegistry: false
-    serviceUrl:
-      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
-  server:
-    waitTimeInMsWhenSyncEmpty: 0
+    server:
+      waitTimeInMsWhenSyncEmpty: 0
+      peer-node-read-timeout-ms: 60000

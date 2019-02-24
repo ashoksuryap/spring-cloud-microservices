@@ -4,5 +4,10 @@ spring:
 
 eureka:
   client:
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
       defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+    instance:
+      prefer-ip-address: true
+      leaseRenewalIntervalInSeconds: 5

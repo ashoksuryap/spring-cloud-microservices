@@ -1,5 +1,10 @@
 server:
   port: 9000
-  
+
+turbine:
+  aggregator:
+    clusterConfig: BOOK-SERVICE
+  appConfig: BOOK-SERVICE
+
 logging:
   level.org.springframework.security: DEBUG

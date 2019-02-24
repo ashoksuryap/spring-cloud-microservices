@@ -1,4 +1,6 @@
 spring:
+  aop:
+    proxyTargetClass: true
   application:
     name: api-gateway
 
@@ -13,3 +15,19 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+    instance:
+      prefer-ip-address: true
+      leaseRenewalIntervalInSeconds: 5
+
+zuul:
+  routes:
+    book-service: /books/**
+    inventory-service: /inventory/**
+    review-service: /reviews/**
+    uaa-service:
+      sensitiveHeaders:
+      stripPrefix: false
+  add-proxy-headers: true
+
+logging:
+  level.org.springframework.security: DEBUG
