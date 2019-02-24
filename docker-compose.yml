@@ -1,7 +1,7 @@
 version: '3'
 services:
   mysql-db:
-    hostname: bookservice
+    hostname: mysql-db
     environment:
       MYSQL_DATABASE: bookservice
       MYSQL_PASSWORD: password
@@ -65,18 +65,4 @@ services:
     image: ashoksuryap/book-service
     ports:
       - '8070:8070'
-    restart: always
-  hystrix-monitor-service:
-    image: ashoksuryap/hystrix-monitor-service
-    hostname: hystrix-monitor-service
-    depends_on:
-      - service-registry
-      - book-service
-      - review-service
-      - inventory-service
-    environment:
-      EUREKA_HOST: service-registry
-      EUREKA_PORT: 8761
-    ports:
-      - '9000:9000'
     restart: always
