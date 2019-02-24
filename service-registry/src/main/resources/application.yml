@@ -14,6 +14,6 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-    server:
-      waitTimeInMsWhenSyncEmpty: 0
-      peer-node-read-timeout-ms: 60000
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    peer-node-read-timeout-ms: 600000
