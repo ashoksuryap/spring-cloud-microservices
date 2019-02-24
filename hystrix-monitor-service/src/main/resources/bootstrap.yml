@@ -1,10 +1,6 @@
 spring:
   application:
     name: hystrix-monitor
-  cloud:
-    config:
-      discovery:
-        enabled: false
 
 eureka:
   client:

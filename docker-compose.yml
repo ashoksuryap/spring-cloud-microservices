@@ -1,28 +1,30 @@
----
+version: '3'
 services:
   mysql-db:
-    container_name: bookservice-db
+    hostname: bookservice
     environment:
       MYSQL_DATABASE: bookservice
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-    image: "mysql:latest"
+    image: 'mysql:latest'
     ports:
-      - "3307:3306"
+      - '3307:3306'
+    restart: always
   mysql-db2:
-    container_name: reviewservice-db
+    hostname: reviewservice-db
     environment:
       MYSQL_DATABASE: reviewservice
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-    image: "mysql:latest"
+    image: 'mysql:latest'
     ports:
-      - "3306:3306"
+      - '3306:3306'
   service-registry:
-    container_name: service-registry
+    hostname: service-registry
     image: ashoksuryap/service-registry
     ports:
-      - "8761:8761"
+      - '8761:8761'
+    restart: always
   review-service:
     depends_on:
       - service-registry
@@ -32,44 +34,35 @@ services:
       DB_PORT: 3306
       EUREKA_HOST: service-registry
       EUREKA_PORT: 8761
-    container_name: review-service
+    hostname: review-service
     image: ashoksuryap/review-service
     ports:
-      - "8050:8050"
+      - '8050:8050'
+    restart: always
   inventory-service:
     depends_on:
       - service-registry
     environment:
       EUREKA_HOST: service-registry
       EUREKA_PORT: 8761
-    container_name: inventory-service
+    hostname: inventory-service
     image: ashoksuryap/inventory-service
     ports:
-      - "8060:8060"
+      - '8060:8060'
+    restart: always
   book-service:
     depends_on:
       - service-registry
       - mysql-db
+      - review-service
+      - inventory-service
     environment:
       DB_HOST: mysql-db
       DB_PORT: 3306
       EUREKA_HOST: service-registry
       EUREKA_PORT: 8761
-    container_name: book-service
+    hostname: book-service
     image: ashoksuryap/book-service
     ports:
-      - "8070:8070"
-  api-gateway:
-    image: ashoksuryap/api-gateway
-    container_name: api-gateway
-    depends_on:
-      - service-registry
-      - book-service
-      - inventory-service
-      - review-service
-    environment:
-      EUREKA_HOST: service-registry
-      EUREKA_PORT: 8761
-    ports:
-      - "8080:8080"
-version: "3"
+      - '8070:8070'
+    restart: always

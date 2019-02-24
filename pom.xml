@@ -21,7 +21,7 @@
 		<module>book-service</module>
 		<module>inventory-service</module>
 		<module>review-service</module>
-		<!--<module>hystrix-monitor-service</module>-->
+		<module>hystrix-monitor-service</module>
 		<module>api-gateway</module> 
 
   </modules>
