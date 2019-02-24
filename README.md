@@ -79,3 +79,10 @@ We have to go to ${BASE_DIR}/spring-cloud-microservices/ and execute $ docker-co
    It will take care of redirecting the browser for UAA 
 
 
+Docker toolbox:-
+C:\Program Files\Docker Toolbox\start.sh
+export DOCKER_TLS_VERIFY="1"
+
+Docker Desktop:-
+docker Settings/General
+export DOCKER_HOST="tcp://192.168.99.101:2376"
