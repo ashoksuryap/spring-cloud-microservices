@@ -44,7 +44,6 @@ services:
       - eureka
       - bookservicedb
       - reviewservice
-      - inventoryservice
     environment:
       DB_HOST: bookservicedb
       DB_PORT: 3306
