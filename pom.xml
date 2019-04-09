@@ -16,14 +16,8 @@
 
 	<modules>
 		<module>service-registry</module>
-		<!--<module>config-server</module>-->
-		<!--<module>uaa-service</module>-->
 		<module>book-service</module>
-		<module>inventory-service</module>
 		<module>review-service</module>
-		<module>hystrix-monitor-service</module>
-		<module>api-gateway</module> 
-
   </modules>
 
 	<properties>
